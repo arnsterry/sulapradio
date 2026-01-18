@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +13,9 @@
     
     <style>
         :root { --sonik-yellow: #f8ff00; }
-        body { background-color: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; margin: 0; }
+        body { background-color: #000; color: white; font-family: 'Roboto', sans-serif; margin: 0; }
         
-        /* MOBILE STABILITY FIX */
-        #hero-slider { position: absolute; inset: 0; z-index: 0; height: 100dvh; }
+        #hero-slider { position: absolute; inset: 0; z-index: 0; height: 100%; }
         .slide { position: absolute; inset: 0; background-size: cover; background-position: center center; display: none; height: 100%; }
 
         #splash-screen {
@@ -36,7 +36,6 @@
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.6) 100%); z-index: 1; }
         .station-logo { height: 110px; width: auto; filter: drop-shadow(0 0 10px rgba(248,255,0,0.3)); }
         
-        /* RIGHT-SIDE SOCIAL BAR */
         .social-bar { 
             position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 150; 
             display: flex; flex-direction: column; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -79,15 +78,13 @@
         </div>
     </div>
 
-    <section class="relative h-[100dvh] flex items-center px-6 md:px-24">
+    <section class="relative h-[75dvh] flex items-center px-6 md:px-24">
         <div id="hero-slider"></div>
         <div class="hero-overlay"></div>
-
         <nav class="absolute top-0 left-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center">
             <img src="img/logo.png" alt="SULAP RADIO" class="station-logo">
             <button id="open-panel" class="bg-yellow-400 text-black px-6 py-2 text-[10px] font-black uppercase">INTERACT LIVE</button>
         </nav>
-
         <div class="relative z-20 w-full max-w-5xl">
             <div class="flex items-center space-x-3 mb-4">
                 <span class="live-tag bg-red-600 text-white text-[9px] px-2 py-1 font-bold">ON AIR</span>
@@ -101,25 +98,28 @@
         </div>
     </section>
 
-    <section class="bg-[#080808] py-16 px-6 md:px-24 border-t border-white/5">
+    <section class="bg-[#080808] pt-16 pb-40 px-6 md:px-24 border-t border-white/5">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-yellow-400 text-[10px] font-black tracking-[0.4em] mb-10 uppercase">Sulap Radio Profile</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 text-gray-400 leading-relaxed" style="font-size: 11px;">
-                <div class="space-y-4">
-                    <p><strong class="text-white">Welcome to SULAP RADIO</strong> — the official home of the Sulap Compound, a digital stronghold for raw sound, real voices, and unapologetic music culture. We broadcast cool, timeless, and vibe-driven music from the past to the present — sounds that shaped generations and continue to move today, creating a space where music feels alive, personal, and real. This is not just a radio station — this is a movement.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 text-gray-400 leading-relaxed" style="font-size: 11px;">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-white font-bold uppercase mb-2">Welcome to SULAP RADIO</h3>
+                        <p>Welcome to SULAP RADIO — the official home of the Sulap Compound, a digital stronghold for raw sound, real voices, and unapologetic music culture. We broadcast cool, timeless, and vibe-driven music from the past to the present — sounds that shaped generations and continue to move today, creating a space where music feels alive, personal, and real. This is not just a radio station — this is a movement.</p>
+                    </div>
                     <p>Born and broadcasting straight from the heart of Bislig City, SULAP RADIO exists for listeners who crave something different. For those who grew tired of predictable playlists and soulless rotations. For the ones who let music speak when words fall short — whether late at night, on long rides, or during quiet moments of reflection.</p>
                 </div>
                 
-                <div class="space-y-4">
-                    <p><strong class="text-white">Rooted in Bislig City</strong> — Bislig is more than a location; it’s a vibe and a community. A city filled with cool, resilient, and creative people who carry music in their everyday lives. From roadside speakers to beachside hangouts, music flows naturally through the city.</p>
-                    <p><strong class="text-white">Our Mission</strong> — To create an independent, high-energy platform that celebrates music across generations and connects listeners through sound. We exist to:</p>
-                    <ul class="list-disc pl-4 space-y-1 text-yellow-400/80">
-                        <li>Showcase music from the past, present, and beyond</li>
-                        <li>Support local, independent, and underground artists</li>
-                        <li>Break free from mainstream limits</li>
-                        <li>Give listeners a place that feels authentic and creative</li>
-                    </ul>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-white font-bold uppercase mb-2">Rooted in Bislig City</h3>
+                        <p>Bislig City is more than a location — it’s a vibe and a community. A city filled with cool, resilient, and creative people who carry music in their everyday lives. From roadside speakers and neighborhood jams to beachside hangouts and midnight listening sessions, music flows naturally through the city. Bislig is a place where underground culture quietly thrives, where local talent grows without needing validation, and where passion matters more than trends. SULAP RADIO captures this spirit — the warmth of the people, the rhythm of the streets, and the deep love for music that connects everyone here.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold uppercase mb-2">Our Mission</h3>
+                        <p>Our mission is simple yet powerful: To create an independent, high-energy platform that celebrates music across generations, supports local and underground talent, and connects listeners through sound and shared experience. We exist to showcase music from the past and present, support local artists, and give listeners a place that feels authentic and creative.</p>
+                    </div>
                 </div>
             </div>
         </div>
