@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SULAP RADIO | OFFICIAL LIVE STATION</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,20 +12,32 @@
     
     <style>
         :root { --sonik-yellow: #f8ff00; }
-        body { background-color: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
+        body { background-color: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; margin: 0; }
         
+        /* MOBILE STABILITY FIX */
+        #hero-slider { 
+            position: absolute; 
+            inset: 0; 
+            z-index: 0; 
+            height: 100dvh; /* Dynamic height for mobile browsers */
+        }
+        .slide { 
+            position: absolute; 
+            inset: 0; 
+            background-size: cover; 
+            background-position: center center; 
+            display: none; 
+            height: 100%;
+        }
+
         #splash-screen {
             position: fixed; inset: 0; z-index: 9999;
             background: radial-gradient(circle, #111 0%, #000 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
-        .splash-logo { height: 120px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(248, 255, 0, 0.4)); }
-        .tune-in-btn {
-            font-family: 'Metal Mania', cursive; background: var(--sonik-yellow); color: black;
-            padding: 1rem 3rem; font-size: 1.5rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s;
-        }
-
+        .splash-logo { height: 140px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(248, 255, 0, 0.4)); }
+        
         .lodeh-font { 
             font-family: 'Metal Mania', cursive; letter-spacing: 2px; text-transform: uppercase;
             color: #fff; text-shadow: 3px 3px 0px var(--sonik-yellow);
@@ -33,16 +45,12 @@
             white-space: nowrap;
         }
 
-        #hero-slider { position: absolute; inset: 0; z-index: 0; }
-        .slide { position: absolute; inset: 0; background-size: cover; background-position: center; display: none; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 100%); z-index: 1; }
         
-        /* UPDATED STATION LOGO SIZE */
+        /* LOGO SIZE UPDATE */
         .station-logo { height: 110px; width: auto; filter: drop-shadow(0 0 10px rgba(248,255,0,0.3)); }
         
-        #interaction-panel { display: none; background: #0a0a0a; border-bottom: 4px solid var(--sonik-yellow); height: 100vh; overflow-y: auto; position: fixed; top: 0; width: 100%; z-index: 200; }
-        
-        /* UPDATED SOCIAL BAR: RIGHT SIDE + AUTO-HIDE */
+        /* RIGHT-SIDE SOCIAL BAR WITH AUTO-HIDE */
         .social-bar { 
             position: fixed; 
             right: 0; 
@@ -51,14 +59,16 @@
             z-index: 150; 
             display: flex; 
             flex-direction: column; 
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .social-bar.hidden-side { transform: translateY(-50%) translateX(80%); }
+        .social-bar.hidden-side { transform: translateY(-50%) translateX(75%); }
         .social-bar:hover { transform: translateY(-50%) translateX(0); }
 
-        .social-icon { background: rgba(17, 17, 17, 0.9); color: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; transition: 0.3s; border-bottom: 1px solid #222; border-left: 3px solid var(--sonik-yellow); }
+        .social-icon { background: rgba(10, 10, 10, 0.9); color: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; transition: 0.3s; border-bottom: 1px solid #222; border-left: 3px solid var(--sonik-yellow); }
         .social-icon:hover { background: var(--sonik-yellow); color: black; width: 65px; }
 
+        #interaction-panel { display: none; background: #0a0a0a; border-bottom: 4px solid var(--sonik-yellow); height: 100vh; overflow-y: auto; position: fixed; top: 0; width: 100%; z-index: 200; }
+        .tune-in-btn { font-family: 'Metal Mania', cursive; background: var(--sonik-yellow); color: black; padding: 1rem 3rem; font-size: 1.5rem; letter-spacing: 3px; cursor: pointer; }
         .live-tag { animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
     </style>
@@ -80,33 +90,23 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
                 <h2 class="text-2xl md:text-4xl font-black italic text-white uppercase italic">INTERACT <span class="text-yellow-400">LIVE</span></h2>
-                <button id="close-panel" class="text-yellow-400 border border-yellow-400 px-4 py-1 uppercase font-bold text-xs hover:bg-yellow-400 hover:text-black transition">Close [X]</button>
+                <button id="close-panel" class="text-yellow-400 border border-yellow-400 px-4 py-1 uppercase font-bold text-xs">Close [X]</button>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div>
-                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">Recently Played</h3>
-                    <div id="recent-list" class="space-y-2"></div>
-                </div>
-                <div class="flex flex-col h-[550px]">
-                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">Station Playlist</h3>
-                    <input type="text" id="list-filter" placeholder="SEARCH SONGS..." class="bg-[#111] border border-white/10 p-3 mb-4 text-[10px] font-bold text-yellow-400 outline-none">
-                    <div id="song-library" class="overflow-y-auto space-y-2 flex-grow pr-2"></div>
-                </div>
-                <div>
-                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">Listener Chat</h3>
-                    <iframe src="https://www3.cbox.ws/box/?boxid=3551593&boxtag=Agz31u" width="100%" height="450" frameborder="0"></iframe>
-                </div>
+                <div><h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">History</h3><div id="recent-list" class="space-y-2"></div></div>
+                <div class="flex flex-col h-[550px]"><h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">Playlist</h3><input type="text" id="list-filter" placeholder="SEARCH..." class="bg-[#111] border border-white/10 p-3 mb-4 text-[10px] text-yellow-400 outline-none"><div id="song-library" class="overflow-y-auto space-y-2 flex-grow"></div></div>
+                <div><h3 class="text-yellow-400 text-sm mb-4 tracking-widest italic font-bold uppercase">Chat</h3><iframe src="https://www3.cbox.ws/box/?boxid=3551593&boxtag=Agz31u" width="100%" height="450" frameborder="0"></iframe></div>
             </div>
         </div>
     </div>
 
-    <section class="relative h-screen flex items-center px-6 md:px-24">
+    <section class="relative h-[100dvh] flex items-center px-6 md:px-24">
         <div id="hero-slider"></div>
         <div class="hero-overlay"></div>
 
         <nav class="absolute top-0 left-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center">
             <img src="img/logo.png" alt="SULAP RADIO" class="station-logo">
-            <button id="open-panel" class="bg-yellow-400 text-black px-6 py-2 text-[10px] font-black uppercase hover:bg-white transition">INTERACT LIVE</button>
+            <button id="open-panel" class="bg-yellow-400 text-black px-6 py-2 text-[10px] font-black uppercase">INTERACT LIVE</button>
         </nav>
 
         <div class="relative z-20 w-full max-w-5xl">
@@ -116,7 +116,7 @@
             </div>
             <h1 class="lodeh-font text-5xl md:text-7xl lg:text-8xl mb-8">SULAP RADIO</h1>
             <div class="border-l-4 border-yellow-400 pl-6">
-                <p id="current-track" class="text-xl md:text-3xl font-bold uppercase tracking-tighter leading-none mb-2 text-white italic">Connecting Stream...</p>
+                <p id="current-track" class="text-xl md:text-3xl font-bold uppercase tracking-tighter leading-none mb-2 text-white italic">Connecting...</p>
                 <p class="text-gray-400 text-xs uppercase font-bold tracking-widest italic">Digital FM Stream Worldwide</p>
             </div>
         </div>
@@ -137,10 +137,10 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4 w-1/3">
                 <div id="now-playing-art" class="hidden md:block w-12 h-12 bg-gray-900 border border-white/10 bg-cover bg-center"></div>
-                <div class="truncate"><h4 id="footer-track" class="font-black text-[11px] uppercase truncate">Sulap Radio</h4></div>
+                <div class="truncate text-[11px] uppercase font-black" id="footer-track">Sulap Radio</div>
             </div>
-            <button onclick="togglePlay()" class="text-5xl text-yellow-400 hover:scale-110 transition"><i id="playIcon" class="fas fa-play-circle"></i></button>
-            <div class="w-1/3 flex justify-end"><input type="range" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)" class="accent-yellow-400 w-32"></div>
+            <button onclick="togglePlay()" class="text-5xl text-yellow-400 transition"><i id="playIcon" class="fas fa-play-circle"></i></button>
+            <div class="w-1/3 flex justify-end"><input type="range" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)" class="accent-yellow-400 w-24 md:w-32"></div>
         </div>
     </footer>
 
@@ -155,23 +155,14 @@
             audio.play();
             $('#playIcon').attr('class', 'fas fa-pause-circle');
             $('#splash-screen').css({'opacity': '0', 'visibility': 'hidden'});
-            
-            // Auto-hide socials 3 seconds after start
-            setTimeout(() => {
-                $('#side-socials').addClass('hidden-side');
-            }, 3000);
+            setTimeout(() => { $('#side-socials').addClass('hidden-side'); }, 3500);
         }
 
         function updateLiveInfo() {
             $.getJSON(`${API_BASE}/nowplaying/${STATION_ID}`, function(data) {
-                const track = data.now_playing.song.text;
-                const art = data.now_playing.song.art;
-                const playlistName = data.now_playing.playlist || "SULAP LIVE";
-                
-                $('#current-track, #footer-track').text(track);
-                $('#current-playlist-tag').text(playlistName);
-                $('#now-playing-art').css('background-image', `url(${art})`);
-                
+                $('#current-track, #footer-track').text(data.now_playing.song.text);
+                $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
+                $('#now-playing-art').css('background-image', `url(${data.now_playing.song.art})`);
                 let histHtml = "";
                 data.song_history.slice(0, 5).forEach(item => {
                     histHtml += `<div class="bg-white/5 p-2 border-l-2 border-yellow-400 mb-2 text-[10px] uppercase font-bold flex items-center"><img src="${item.song.art}" class="w-7 h-7 mr-3"><div>${item.song.text}</div></div>`;
@@ -182,27 +173,20 @@
 
         function loadSongLibrary() {
             $.getJSON(`${API_BASE}/station/${STATION_ID}/requests`, function(data) {
-                fullLibrary = data;
-                renderSongs(fullLibrary);
+                fullLibrary = data; renderSongs(fullLibrary);
             });
         }
 
         function renderSongs(songs) {
             let html = "";
             songs.forEach(item => {
-                html += `<div class="bg-white/5 p-2 flex items-center justify-between mb-1 border-b border-white/5"><div class="flex items-center space-x-3"><img src="${item.song.art}" class="w-8 h-8 rounded-sm"><div><div class="text-[10px] font-black uppercase text-white">${item.song.title}</div><div class="text-[8px] text-gray-500 uppercase">${item.song.artist}</div></div></div><button onclick="sendRequest('${item.request_id}')" class="bg-yellow-400 text-black px-3 py-1 text-[8px] font-black uppercase">REQ</button></div>`;
+                html += `<div class="bg-white/5 p-2 flex items-center justify-between mb-1 border-b border-white/5"><div class="flex items-center space-x-3"><img src="${item.song.art}" class="w-8 h-8"><div><div class="text-[10px] font-black uppercase text-white">${item.song.title}</div><div class="text-[8px] text-gray-500 uppercase">${item.song.artist}</div></div></div><button onclick="sendRequest('${item.request_id}')" class="bg-yellow-400 text-black px-3 py-1 text-[8px] font-black uppercase">REQ</button></div>`;
             });
             $('#song-library').html(html);
         }
 
         function sendRequest(requestId) {
-            $.ajax({
-                url: `${API_BASE}/station/${STATION_ID}/request/${requestId}`,
-                type: 'POST',
-                headers: { 'X-API-Key': _k },
-                success: function() { alert("Request Sent!"); },
-                error: function() { alert("Request limit reached."); }
-            });
+            $.ajax({ url: `${API_BASE}/station/${STATION_ID}/request/${requestId}`, type: 'POST', headers: { 'X-API-Key': _k }, success: function() { alert("Request Sent!"); } });
         }
 
         $(document).ready(function(){
@@ -212,19 +196,10 @@
                 slidesHtml += `<div class="slide" ${show} style="background-image: url('img/slide${i}.jpg');"></div>`;
             }
             $('#hero-slider').html(slidesHtml);
-
             updateLiveInfo(); loadSongLibrary();
             setInterval(updateLiveInfo, 10000);
-            
-            $('#open-panel').click(() => $('#interaction-panel').slideDown(400));
-            $('#close-panel').click(() => $('#interaction-panel').slideUp(400));
-
-            $('#list-filter').on('keyup', function() {
-                let val = $(this).val().toLowerCase();
-                let filtered = fullLibrary.filter(s => s.song.text.toLowerCase().includes(val));
-                renderSongs(filtered);
-            });
-
+            $('#open-panel').click(() => $('#interaction-panel').slideDown());
+            $('#close-panel').click(() => $('#interaction-panel').slideUp());
             let slides = $('.slide'); let current = 0;
             setInterval(() => {
                 if(slides.length > 0) {
