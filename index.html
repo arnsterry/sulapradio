@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SULAP RADIO | OFFICIAL LIVE STATION</title>
+    <title>SULAP RADIO | BROADCASTING LIVE FROM BISLIG CITY</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -17,7 +17,6 @@
         #hero-slider { position: absolute; inset: 0; z-index: 0; height: 100%; }
         .slide { position: absolute; inset: 0; background-size: cover; background-position: center center; display: none; height: 100%; }
 
-        /* Navigation spacing */
         nav { padding-top: 10px !important; } 
 
         .lodeh-font { 
@@ -36,7 +35,6 @@
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 100%); z-index: 1; }
         .station-logo { height: 75px; width: auto; }
         
-        /* Fixed Socials */
         .social-bar { 
             position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 150; 
             display: flex; flex-direction: column; gap: 8px;
@@ -47,7 +45,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; font-size: 13px;
         }
 
-        /* Interaction Panel Fix */
         #interaction-panel { 
             display: none; background: #0a0a0a; border-bottom: 4px solid var(--sonik-yellow); 
             height: 100vh; overflow-y: auto; position: fixed; top: 0; width: 100%; z-index: 200; 
@@ -104,7 +101,7 @@
             <h1 class="lodeh-font text-4xl mb-3">SULAP RADIO</h1>
             <div class="border-l-2 border-yellow-400 pl-4">
                 <p id="current-track" class="track-info-font text-lg leading-tight mb-1 text-white">Connecting...</p>
-                <p class="text-gray-400 text-[9px] uppercase font-bold tracking-wider italic">Streaming live from the heart of Bislig City - Mangagoy</p>
+                <p class="text-gray-400 text-[9px] uppercase font-bold tracking-wider italic">Live from Bislig City</p>
             </div>
         </div>
     </section>
@@ -123,7 +120,7 @@
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-white font-bold uppercase mb-2">Rooted in Bislig City</h3>
-                        <p>Bislig City is more than a location — it’s a vibe and a community. A city filled with cool, resilient, and creative people who carry music in their everyday lives.</p>
+                        <p>Bislig City is more than a location — it’s a vibe and a community. A city filled with cool, resilient, and creative people who carry music in their everyday lives. From roadside speakers and neighborhood jams to beachside hangouts and midnight listening sessions, music flows naturally through the city.</p>
                     </div>
                     <div>
                         <h3 class="text-white font-bold uppercase mb-2">Our Mission</h3>
@@ -194,10 +191,10 @@
             updateLiveInfo(); loadSongLibrary();
             setInterval(updateLiveInfo, 10000);
 
+            // Interaction Panel Triggers (Restored)
             $('#open-panel').click(() => $('#interaction-panel').fadeIn());
             $('#close-panel').click(() => $('#interaction-panel').fadeOut());
 
-            // Slider Logic
             let slidesHtml = "";
             for(let i=1; i<=20; i++) {
                 let show = (i===1) ? 'style="display:block;"' : '';
