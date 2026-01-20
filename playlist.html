@@ -1,13 +1,13 @@
-<!DOCTYPE html><html><head><title>Sulap Radio List</title>
+<!DOCTYPE html><html><head><title>Sulap Radio Schedule</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <style>body{background:#000; color:#ffcc00; font-family:sans-serif; text-align:center; padding:20px;}
 ul{padding:0; margin:auto; max-width:600px;} li{padding:12px; border-bottom:1px solid #222; list-style:none; font-size:1.1em;}
 #search{padding:12px; width:90%; max-width:400px; border-radius:8px; border:none; margin-bottom:20px; font-size:16px;}
 .logo{max-width:250px; margin-bottom:10px;}</style></head><body>
 <img src='img/logo.png' class='logo' alt='Logo'>
-<h1>Sulap Radio Schedule</h1><h3>Showing: DANCE MUSIC REMIX</h3>
+<h1>Sulap Radio Schedule</h1><h3>Showing: GENZ MUSIC</h3>
 <input type='text' id='search' onkeyup='filterList()' placeholder='Search in this schedule...'>
 <ul id='songlist'>
-<li>No songs found in this specific schedule.</li>
+<li>The schedule is currently syncing... please check back in a moment.</li>
 </ul>
-<script>function filterList(){var input=document.getElementById('search');var filter=input.value.toUpperCase();var ul=document.getElementById('songlist');var li=ul.getElementsByTagName('li');for(var i=0;i<li.length;i++){var txt=li[i].textContent||li[i].innerText;if(txt.toUpperCase().indexOf(filter)>-1){li[i].style.display='';}else{li[i].style.display='none';}}}</script></body></html>
+<script>function filterList(){var input=document.getElementById('search');var filter=input.value.toUpperCase();var ul=document.getElementById('songlist');var li=ul.getElementsByTagName('li');for(var i=0; i<li.length; i++){var txt=li[i].textContent||li[i].innerText;if(txt.toUpperCase().indexOf(filter) > -1){li[i].style.display='';}else{li[i].style.display='none';}}}</script></body></html>
