@@ -8,6 +8,6 @@ ul{padding:0; margin:auto; max-width:600px;} li{padding:12px; border-bottom:1px 
 <h1>Sulap Radio Schedule</h1><h3>Showing: DANCE MUSIC REMIX</h3>
 <input type='text' id='search' onkeyup='filterList()' placeholder='Search in this schedule...'>
 <ul id='songlist'>
-<li>No songs found in this specific playlist.</li>
+<li>No songs found in this specific schedule.</li>
 </ul>
 <script>function filterList(){var input=document.getElementById('search');var filter=input.value.toUpperCase();var ul=document.getElementById('songlist');var li=ul.getElementsByTagName('li');for(var i=0;i<li.length;i++){var txt=li[i].textContent||li[i].innerText;if(txt.toUpperCase().indexOf(filter)>-1){li[i].style.display='';}else{li[i].style.display='none';}}}</script></body></html>
