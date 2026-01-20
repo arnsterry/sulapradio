@@ -1,13 +1,211 @@
-<!DOCTYPE html><html><head><title>Sulap Radio Schedule</title>
+<!DOCTYPE html><html><head><title>Sulap Radio List</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <style>body{background:#000; color:#ffcc00; font-family:sans-serif; text-align:center; padding:20px;}
 ul{padding:0; margin:auto; max-width:600px;} li{padding:12px; border-bottom:1px solid #222; list-style:none; font-size:1.1em;}
 #search{padding:12px; width:90%; max-width:400px; border-radius:8px; border:none; margin-bottom:20px; font-size:16px;}
 .logo{max-width:250px; margin-bottom:10px;}</style></head><body>
-<img src='img/logo.png' class='logo' alt='Logo'>
-<h1>Sulap Radio Schedule</h1><h3>Showing: GENZ MUSIC</h3>
-<input type='text' id='search' onkeyup='filterList()' placeholder='Search in this schedule...'>
-<ul id='songlist'>
-<li>The schedule is currently syncing... please check back in a moment.</li>
-</ul>
-<script>function filterList(){var input=document.getElementById('search');var filter=input.value.toUpperCase();var ul=document.getElementById('songlist');var li=ul.getElementsByTagName('li');for(var i=0; i<li.length; i++){var txt=li[i].textContent||li[i].innerText;if(txt.toUpperCase().indexOf(filter) > -1){li[i].style.display='';}else{li[i].style.display='none';}}}</script></body></html>
+<img src='img/logo.png' class='logo'>
+<h1>Sulap Radio Schedule</h1><h3>Current: GENZ MUSIC</h3>
+<input type='text' id='search' onkeyup='f()' placeholder='Search in this schedule...'>
+<ul id='l'>
+<li>8 Ballin' - Know Me</li>
+<li>420 Soldierz - Salamin</li>
+<li>1096 Gang - Pajama Party</li>
+<li>Abra Ft. Chito Miranda - Diwata</li>
+<li>Ace Banzuelo - Muli (Official Lyric Video)</li>
+<li>Adie - Paraluman (Official Lyric Video)</li>
+<li>Adie - Tahanan (Official Lyric Video)</li>
+<li>Adie, Janine Berdin - Mahika (Official Lyric Visualizer)</li>
+<li>Al James - Repeat ft. Rjay Ty & Lexus (Official Music Video)</li>
+<li>Al James, Muric - Mood (Official Lyric Video)</li>
+<li>Amiel Sol - Ikaw Lang Patutunguhan (Official Lyric Visualizer)</li>
+<li>Arcos, Aloy, Ar-R, Tyrone - BABY GIRL</li>
+<li>Ariana Grande & John Legend - Beauty And The Beast</li>
+<li>Ariana Grande - Positions</li>
+<li>Ariana Grande - we can't be friends (wait for your love) (lyric visualizer)</li>
+<li>Arthur Nery - Di Nakakasawa (Official Lyric Video)</li>
+<li>Arthur Nery - Higa (Official Lyric Video)</li>
+<li>Arthur Nery - Isa lang</li>
+<li>AYEEMAN feat. MIKE KOSA - LAKAS TAMA</li>
+<li>B.o.B - Nothin' On You (feat. Bruno Mars) [Official Video]</li>
+<li>Bandang Lapis - Kabilang Buhay</li>
+<li>Ben and Ben - Kathang Isip</li>
+<li>BillieEilishVEVO - Billie Eilish - BIRDS OF A FEATHER (Official Lyric Video) - Billie Eilish - BIRDS OF A FEATHER (Official Lyric Video)</li>
+<li>BINI - Blink Twice (Lyrics)</li>
+<li>Bini - I Feel Good</li>
+<li>Bini - Karera</li>
+<li>Bini - Lagi</li>
+<li>BINI - Pantropiko (Lyrics)</li>
+<li>Bini - Sweet Tooth</li>
+<li>BLACKPINK - âë°ì´(JUMP)â (Official Audio)</li>
+<li>Blanktape Ft. Diorap - Turuan Mo Ko Nyan</li>
+<li>Bruno Mars - Bruno Mars - I Just Might [Official Music Video] - Bruno Mars - I Just Might [Official Music Video]</li>
+<li>Bruno Mars - It Will Rain (Lyrics)</li>
+<li>Bruno Mars - Talking To The Moon (Official Lyric Video)</li>
+<li>Bruno Mars - Versace On The Floor (Lyrics)</li>
+<li>Bruno Mars - When I Was Your Man</li>
+<li>Calein - Umaasa (Official Lyric Video)</li>
+<li>Chappell Roan - Good Luck, Babe! (Official Lyric Video)</li>
+<li>Chocolate Factory - Ilalim</li>
+<li>Chocolate Factory - Juana</li>
+<li>Chocolate Factory - Kung Ika'y Akin</li>
+<li>coldplay  - Sparks</li>
+<li>Cookie$ - Beplop</li>
+<li>Cookie$ - Bogo Prod. By Flexyboy</li>
+<li>Cup of Joe - Multo</li>
+<li>Cup of Joe - Pahina</li>
+<li>Cup of Joe and Janine TeÃ±oso - Tingin</li>
+<li>Dan Music - Bruno Mars - Just The Way You Are (Lyrics) - Bruno Mars - Just The Way You Are (Lyrics)</li>
+<li>Dance With You - Skusta Clee Ft. Yuri Dope (Cov</li>
+<li>December Avenue - Bulong (OFFICIAL MUSIC VIDEO)</li>
+<li>December Avenue - Eroplanong Papel</li>
+<li>December Avenue - Saksi Ang Langit (OFFICIAL LYRIC VIDEO)</li>
+<li>Denise Julia - B.A.D. (Lyrics) ft. P-Lo</li>
+<li>Dilaw  - Uhaw (Tayong Lahat)</li>
+<li>Dionela - Marilag (Lyrics)</li>
+<li>Doja Cat - Paint The Town Red (Lyrics)</li>
+<li>Earl Agustin - Tibok</li>
+<li>Ed Sheeran - Ed Sheeran - Photograph (Official Lyric Video) - Ed Sheeran - Photograph (Official Lyric Video)</li>
+<li>Ex Battalion - Hayaan Mo Sila</li>
+<li>Ex-Battallion - Unreleased (Mahirap Na) - Kaka</li>
+<li>Faded (Raw) Official Music Video - Illest Morena</li>
+<li>FIFTY FIFTY - Cupid (Twin Version) (Lyrics)</li>
+<li>fitterkarma - Pag-Ibig ay Kanibalismo II</li>
+<li>Gabriela Performance Video  KATSEYE</li>
+<li>Gareth Gates - Anyone Of Us (Stupid Mistake)</li>
+<li>Gigi De Lana  Jon  LA  Jake  Romeo - Yesterday When I Was Young</li>
+<li>Gloc 9 - Love Story Ko</li>
+<li>Gloc 9 - Walang Natira</li>
+<li>Gloc-9 - Simpleng Tao</li>
+<li>Gloc-9 Feat. Rico Blanco - Magda</li>
+<li>Golden Official Lyric Video  KPop Demon Hunters  Sony Animation</li>
+<li>Goldigs feat.Henyong Makata - Masaya Na Ako</li>
+<li>Hey Its Je - Araw-araw w  You (Official Music Video)</li>
+<li>IV of Spade - Mundo</li>
+<li>IV OF SPADES - Aura (Official Lyric Video)</li>
+<li>IV OF SPADES - Come Inside Of My Heart (Official Audio)</li>
+<li>J-King - Tagay</li>
+<li>Jackie Chavez - Kasama Kang Tumanda Grow Old W</li>
+<li>Jacky Chang - Pero Atik Ra</li>
+<li>Janine Berdin - SITWASYONSHIP (Lyrics)</li>
+<li>Jed Baruelo - Nahuhulog (Official Audio)</li>
+<li>Jeff Grecia - Elevate (Lyrics)</li>
+<li>JENNIE - like JENNIE (Official Lyric Video)</li>
+<li>Jessica Sanchez - Dance With My Father</li>
+<li>Jewel Villaflores - Duyog</li>
+<li>Jhay-Know - Bahalag Saging</li>
+<li>Jroa & Emcee Rhenn Ft. Agsunta - Di Ako Fuckboy</li>
+<li>Jroa Ft. Bosx 1ne - Baliw Sayo</li>
+<li>Juan and Kyle - Marikit sa Dilim feat. JAWZ (Official Music Video)</li>
+<li>Juan Caoile, Kyleswish - Marikit</li>
+<li>Justin Bieber - Baby</li>
+<li>Justin Bieber - Confident ft. Chance The Rapper (Official Audio)</li>
+<li>Justin Bieber - DAISIES - DAISIES</li>
+<li>Katrina Velarde - Lason Mong Halik</li>
+<li>Katrina Velarde - Taksil</li>
+<li>Kenaniah - Bahala Na (Official Lyric Video)</li>
+<li>Kendrick Lamar, SZA - luther (Lyrics)</li>
+<li>King Badger - Mi Loves (Otw Na Sayo)</li>
+<li>Kyle Raphael - Libu-libong buwan (uuwian)</li>
+<li>LadyGagaVEVO - Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video) - Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)</li>
+<li>Lauv - I Like Me Better [Official Audio]</li>
+<li>Lauv, LANY - Mean It (Lyrics)</li>
+<li>Le John - Naiilang</li>
+<li>Lil Dicky - Earth</li>
+<li>Lola Amour - Fallen (Official Lyric Video)</li>
+<li>Lola Amour - Raining in Manila (Official Lyric Video)</li>
+<li>Luis Fonsi, Daddy Yankee - Despacito (Remix) Ft. Justin B</li>
+<li>Madison Beer - Madison Beer - bittersweet (Lyric Visualizer) - Madison Beer - bittersweet (Lyric Visualizer)</li>
+<li>Maki - Dilaw (Lyrics)</li>
+<li>Maki - Kahel na Langit</li>
+<li>Malaya Macaraeg - Baga Ka'g Face</li>
+<li>Maroon 5 - Girls Like You</li>
+<li>Maroon 5 - Wait (Audio)</li>
+<li>Mayonnaise - Jopay (Lyrics)</li>
+<li>Melanie Martinez - Play Date [Official Lyric Video]</li>
+<li>Miley Cyrus - Flowers (Official Video)</li>
+<li>MIRA - Come With Me (Official Music Video)</li>
+<li>MIRA - Duro  Lyric Video</li>
+<li>MIRA - Ladida  Lyric Video</li>
+<li>MIRA - Love Again (Lyric Video)</li>
+<li>MIRA - Ring, Ring  Official Video</li>
+<li>Moira Dela Torre - Babalik Sa'yo (Lyrics) From 2 Good 2 Be True</li>
+<li>Moira Dela Torre - Kumpas (Official Lyric Video)</li>
+<li>Nateman ft. Lucky  - Imma Flirt</li>
+<li>NewJeans - 'OMG' Lyrics (ë´ì§ì¤ OMG ê°ì¬)</li>
+<li>Nicole - Panaginip</li>
+<li>Nik Makino - Moon (Lyrics) Ft. Flow G</li>
+<li>Nik Makino x Flow G - We Made It</li>
+<li>NIKI -  Backburner (Official Lyric Video)</li>
+<li>NIKI - lowkey (Lyrics)</li>
+<li>NIKI - Take A Chance With Me (Official Lyric Video)</li>
+<li>No Pets Allowed - Basta Wala Ka</li>
+<li>No Pets Allowed - Gibati</li>
+<li>No Pets Allowed - The Lame Song</li>
+<li>NOBITA - IKAW LANG (Lyrics)</li>
+<li>NOBITA - UNANG SAYAW (feat. Fayeed Tan)  OFFICIAL LYRIC VIDEO</li>
+<li>O SIDE MAFIA X BRGR - GET LOW (Lyrics)</li>
+<li>Oc Dawgz & Skusta Clee - Basta May Alak May Balak</li>
+<li>Oh! Caraga - Ipanumpa Ko (official lyric video)</li>
+<li>Olivia Dean - So Easy (To Fall In Love) (Lyric Video)</li>
+<li>Over October - Ikot (Official Lyric Video)</li>
+<li>Pag-ibig ng Ikaw at Ako - Earl Agustin (Official Lyric Video)</li>
+<li>Paramore - Paramore: The Only Exception [OFFICIAL VIDEO] - Paramore: The Only Exception [OFFICIAL VIDEO]</li>
+<li>Paul N Ballin - POGI</li>
+<li>R!S - HNY FT. JHYMN & CXY (OFFICIAL MUSIC VIDEO)</li>
+<li>Range - ADIOS (Official Video)</li>
+<li>Range - Love can hurt Prod. Castro (OfficialMusicVideo)</li>
+<li>Range - Oks Nako (Lyrics)   TikTok Song</li>
+<li>Range - RELAX (Official Lyric Video)</li>
+<li>Range ft. Bob - KINABUHI</li>
+<li>Ravyn Lenae - Love Me Not</li>
+<li>Rihanna - California King Bed (Lyrics)</li>
+<li>Rob Deniel - Miss Miss (Official Lyric Visualizer)</li>
+<li>Rob Deniel - NANDITO AKO</li>
+<li>Rob Deniel - Rom Com</li>
+<li>Rob Deniel - Wala Na Bang Pag-ibig (Official Lyric Visualizer)</li>
+<li>ROSÃ & Bruno Mars - APT. (Official Music Video)</li>
+<li>Sa Bawat Sandali - Amiel Sol (Visualizer)</li>
+<li>Sabrina Carpenter - Espresso</li>
+<li>Sabrina Carpenter - Manchild (Lyrics)</li>
+<li>Sabrina Carpenter - Nonsense (Official Audio)</li>
+<li>Sabrina Carpenter - Please Please Please (Lyrics)</li>
+<li>Sam Smith - Unholy ft. Kim Petras</li>
+<li>Sandali - Cup of Joe (Official Lyric Video)</li>
+<li>SB19 - MAPA (Lyrics)</li>
+<li>Shamrock - Alipin - (Official Lyric Video)</li>
+<li>Shanti Dope - Down Timez</li>
+<li>Shanti Dope - Nadarang</li>
+<li>Shoti - LDR - Sped Up</li>
+<li>Silent Sanctuary - Bumalik Ka Na Sa'kin (Official Lyric Video)</li>
+<li>Skusta Clee - Kalimutan Ka (Official Music Video)</li>
+<li>Skusta Clee - Lagabog ft. Illest Morena</li>
+<li>Soapdish - Kahit Maputi Na Ang Buhok ko</li>
+<li>sombr - back to friends</li>
+<li>Soultrhll - Tilaw Ra (feat. Jklrd & Cookie$)</li>
+<li>Stacey Ryan - Fall In Love Alone (Official Music Video)</li>
+<li>Stephen Sanchez, Em Beihold - Until I Found You (Lyrics)</li>
+<li>SUGARCANE - Leonora (Official Lyric Video)</li>
+<li>SunKissed Lola - Pasilyo (Official Lyric Video)</li>
+<li>SZA - Kill Bill (Official Audio)</li>
+<li>SZAVEVO - SZA - Snooze (Audio) - SZA - Snooze (Audio)</li>
+<li>Taylor Swift - Anti-Hero (Official Lyric Video)</li>
+<li>Taylor Swift - Back To December (Taylor's Version) (Lyric Video)</li>
+<li>Taylor Swift - Cruel Summer (Official Audio)</li>
+<li>Taylor Swift - Midnight Rain (Official Lyric Video)</li>
+<li>Taylor Swift - Opalite</li>
+<li>Taylor Swift - The Fate of Ophelia</li>
+<li>Taylor Swift â Blank Space (Lyrics)</li>
+<li>The Script - Breakeven (Official Video)</li>
+<li>TJ Monterde - Dating Tayo (Lyric Video)</li>
+<li>Troye Sivan - Angel Baby (Lyrics)</li>
+<li>Tyla - Water</li>
+<li>TylaVEVO - Tyla - CHANEL (Official Music Video) - Tyla - CHANEL (Official Music Video)</li>
+<li>Unique Salonga - Sino (Official Music Video)</li>
+<li>Up Dharma Down - Tadhana</li>
+<li>Up Dharma Down - Unti-Unti</li>
+<li>Zack Tabudlo - Binibini (Official Music Video)</li>
+<li>Zack Tabudlo - Habang Buhay (Lyric Video)</li>
+<li>Zack Tabudlo - Pano (Lyric Video)</li>
+<li>Zara Larsson - Lush Life (Official Video)</li>
+</ul><script>function f(){var i=document.getElementById('search'),v=i.value.toUpperCase(),ul=document.getElementById('l'),li=ul.getElementsByTagName('li');for(var j=0;j<li.length;j++){var t=li[j].textContent||li[j].innerText;li[j].style.display=t.toUpperCase().indexOf(v)>-1?'':'none'}}</script></body></html>
