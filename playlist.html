@@ -1,12 +1,16 @@
 <!DOCTYPE html><html><head><title>Sulap Radio List</title>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta charset='UTF-8'>
+<meta http-equiv='cache-control' content='no-cache, must-revalidate, post-check=0, pre-check=0'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <style>body{background:#000; color:#ffcc00; font-family:sans-serif; text-align:center; padding:20px;}
 ul{padding:0; margin:auto; max-width:600px;} li{padding:12px; border-bottom:1px solid #222; list-style:none; font-size:1.1em;}
 #search{padding:12px; width:90%; max-width:400px; border-radius:8px; border:none; margin-bottom:20px; font-size:16px;}
-.logo{max-width:250px; margin-bottom:10px;}</style></head><body>
+.logo{max-width:250px; margin-bottom:10px;} .ts{color:#555; font-size:0.8em; margin-top:20px;}</style></head><body>
 <img src='img/logo.png' class='logo'>
 <h1>SULAP RADIO PLAYLIST SCHEDULE</h1>
-<h3>Current Playing: DANCE MUSIC REMIX</h3>
+<h2 style='color:#fff;'>Current: GENZ MUSIC</h2>
 <input type='text' id='search' onkeyup='f()' placeholder='Search in this schedule...'>
 <ul id='l'>
 <li>2ne1 - I Don'T Care Mv</li>
@@ -264,4 +268,6 @@ ul{padding:0; margin:auto; max-width:600px;} li{padding:12px; border-bottom:1px 
 <li>Zack Tabudlo - Habang Buhay (Lyric Video)</li>
 <li>Zack Tabudlo - Pano (Lyric Video)</li>
 <li>Zara Larsson - Lush Life (Official Video)</li>
-</ul><script>function f(){var i=document.getElementById('search'),v=i.value.toUpperCase(),ul=document.getElementById('l'),li=ul.getElementsByTagName('li');for(var j=0;j<li.length;j++){var t=li[j].textContent||li[j].innerText;li[j].style.display=t.toUpperCase().indexOf(v)>-1?'':'none'}}</script></body></html>
+</ul>
+<div class='ts'>Last Updated: 05:56:09 AM (25-01-2026)</div>
+<script>function f(){var i=document.getElementById('search'),v=i.value.toUpperCase(),ul=document.getElementById('l'),li=ul.getElementsByTagName('li');for(var j=0;j<li.length;j++){var t=li[j].textContent||li[j].innerText;li[j].style.display=t.toUpperCase().indexOf(v)>-1?'':'none'}}</script></body></html>
