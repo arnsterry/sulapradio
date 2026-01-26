@@ -34,14 +34,12 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.4; }
         }
-        .flicker-on-air {
-            animation: slowFlicker 3s ease-in-out infinite;
-        }
+        .flicker-on-air { animation: slowFlicker 3s ease-in-out infinite; }
 
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 100%); z-index: 1; }
         .station-logo { height: 75px; width: auto; }
         
-        /* Social Bar & Hover Zoom Effect */
+        /* Social Bar & Hover Zoom */
         .social-bar { 
             position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 150; 
             display: flex; flex-direction: column; gap: 8px;
@@ -55,10 +53,15 @@
         }
         .social-icon:hover {
             transform: scale(1.3);
-            background: var(--sonik-yellow);
-            color: black;
-            box-shadow: 0 0 15px var(--sonik-yellow);
-            border-color: var(--sonik-yellow);
+            background: var(--sonik-yellow); color: black;
+            box-shadow: 0 0 15px var(--sonik-yellow); border-color: var(--sonik-yellow);
+        }
+
+        /* Volume Slider Custom Styling */
+        input[type="range"] { -webkit-appearance: none; background: #333; height: 4px; border-radius: 5px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 12px; height: 12px; background: var(--sonik-yellow);
+            border-radius: 50%; cursor: pointer; box-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
         #interaction-panel { 
@@ -102,12 +105,10 @@
     <section class="relative h-[60dvh] overflow-hidden px-6">
         <div id="hero-slider"></div>
         <div class="hero-overlay"></div>
-        
         <nav class="absolute top-2 left-0 w-full z-50 px-6 flex justify-between items-center">
             <img src="img/logo.png" alt="SULAP RADIO" class="station-logo">
             <button id="open-panel" class="bg-yellow-400 text-black px-4 py-2 text-[10px] font-black uppercase">INTERACT LIVE</button>
         </nav>
-
         <div class="absolute bottom-8 left-6 z-20 w-[90%]">
             <div class="flex items-center space-x-2 mb-2">
                 <span class="bg-red-600 text-white text-[8px] px-1.5 py-0.5 font-bold flicker-on-air">ON AIR</span>
@@ -148,12 +149,21 @@
 
     <footer class="fixed bottom-0 w-full z-[150] bg-black border-t-2 border-yellow-400 p-4">
         <audio id="mainAudio" src="https://a11.asurahosting.com:8400/radio.mp3"></audio>
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-3 w-2/3">
-                <div id="now-playing-art" class="w-10 h-10 bg-gray-900 border border-white/10 bg-cover bg-center"></div>
+        <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center space-x-3 w-1/2 md:w-2/3">
+                <div id="now-playing-art" class="w-10 h-10 bg-gray-900 border border-white/10 bg-cover bg-center flex-shrink-0"></div>
                 <div class="truncate text-[10px] uppercase font-black text-white" id="footer-track">Sulap Radio</div>
             </div>
-            <button onclick="togglePlay()" class="text-4xl text-yellow-400"><i id="playIcon" class="fas fa-play-circle"></i></button>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-2">
+                    <button onclick="toggleMute()" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                        <i id="volumeIcon" class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" class="w-20">
+                </div>
+                <button onclick="togglePlay()" class="text-4xl text-yellow-400"><i id="playIcon" class="fas fa-play-circle"></i></button>
+            </div>
         </div>
     </footer>
 
@@ -162,7 +172,8 @@
         const STATION_ID = "507";
         const _k = "f45b139134ce81b1:cd9d1bdd34bd6d0811962c7ccacad167";
         const audio = document.getElementById('mainAudio');
-        let fullLibrary = [];
+        const volumeSlider = document.getElementById('volumeSlider');
+        let lastVolume = 1;
 
         function startStation() {
             audio.play().catch(() => {});
@@ -170,45 +181,73 @@
             $('#splash-screen').fadeOut();
         }
 
+        volumeSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            audio.volume = val;
+            updateVolumeIcon(val);
+            if (val > 0) lastVolume = val;
+        });
+
+        function updateVolumeIcon(val) {
+            const icon = $('#volumeIcon');
+            if (val == 0) icon.attr('class', 'fas fa-volume-mute text-red-500');
+            else if (val < 0.5) icon.attr('class', 'fas fa-volume-down');
+            else icon.attr('class', 'fas fa-volume-up');
+        }
+
+        function toggleMute() {
+            if (audio.volume > 0) { lastVolume = audio.volume; audio.volume = 0; volumeSlider.value = 0; }
+            else { audio.volume = lastVolume; volumeSlider.value = lastVolume; }
+            updateVolumeIcon(audio.volume);
+        }
+
         function updateLiveInfo() {
-            // Cache buster added (?t=) to ensure song updates automatically
-            $.getJSON(`${API_BASE}/nowplaying/${STATION_ID}?t=${Date.now()}`, function(data) {
-                if (data && data.now_playing) {
-                    $('#current-track, #footer-track').text(data.now_playing.song.text);
-                    $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
-                    $('#now-playing-art').css('background-image', `url(${data.now_playing.song.art})`);
-                    
-                    let histHtml = "";
-                    data.song_history.slice(0, 5).forEach(item => {
-                        histHtml += `<div class="bg-white/5 p-2 border-l-2 border-yellow-400 mb-2 text-[10px] uppercase font-bold flex items-center"><img src="${item.song.art}" class="w-7 h-7 mr-3"><div>${item.song.text}</div></div>`;
-                    });
-                    $('#recent-list').html(histHtml);
-                }
+            // Force jQuery to avoid any internal caching
+            $.ajax({
+                url: `${API_BASE}/nowplaying/${STATION_ID}`,
+                data: { t: Date.now() }, // Cache buster
+                cache: false,
+                dataType: "json",
+                success: function(data) {
+                    if (data && data.now_playing) {
+                        const song = data.now_playing.song;
+                        
+                        // Update DOM only if it exists
+                        $('#current-track').fadeOut(200, function() {
+                            $(this).text(song.text).fadeIn(200);
+                        });
+                        
+                        $('#footer-track').text(song.text);
+                        $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
+                        
+                        // Update Album Art
+                        const artUrl = song.art || "img/logo.png";
+                        $('#now-playing-art').css('background-image', `url(${artUrl})`);
+                        
+                        // Update History
+                        let histHtml = "";
+                        if (data.song_history) {
+                            data.song_history.slice(0, 5).forEach(item => {
+                                histHtml += `<div class="bg-white/5 p-2 border-l-2 border-yellow-400 mb-2 text-[10px] uppercase font-bold flex items-center"><img src="${item.song.art}" class="w-7 h-7 mr-3"><div>${item.song.text}</div></div>`;
+                            });
+                            $('#recent-list').html(histHtml);
+                        }
+                    }
+                },
+                error: function() { console.log("Station API offline."); }
             });
         }
 
-        function loadSongLibrary() {
-            $.getJSON(`${API_BASE}/station/${STATION_ID}/requests?t=${Date.now()}`, function(data) {
-                fullLibrary = data; renderSongs(fullLibrary);
-            });
-        }
-
-        function renderSongs(songs) {
-            let html = "";
-            songs.forEach(item => {
-                html += `<div class="bg-white/5 p-2 flex items-center justify-between mb-1 border-b border-white/5"><div class="flex items-center space-x-3"><img src="${item.song.art}" class="w-8 h-8"><div><div class="text-[10px] font-black uppercase text-white">${item.song.title}</div><div class="text-[8px] text-gray-500 uppercase">${item.song.artist}</div></div></div><button onclick="sendRequest('${item.request_id}')" class="bg-yellow-400 text-black px-3 py-1 text-[8px] font-black uppercase">REQ</button></div>`;
-            });
-            $('#song-library').html(html);
-        }
-
-        function sendRequest(requestId) {
-            $.ajax({ url: `${API_BASE}/station/${STATION_ID}/request/${requestId}`, type: 'POST', headers: { 'X-API-Key': _k }, success: function() { alert("Request Sent!"); } });
+        function togglePlay() {
+            if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); }
+            else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); }
         }
 
         $(document).ready(function(){
-            updateLiveInfo(); 
-            loadSongLibrary();
-            setInterval(updateLiveInfo, 10000);
+            // Run immediately
+            updateLiveInfo();
+            // Interval set to 8 seconds for faster refresh
+            setInterval(updateLiveInfo, 8000);
 
             $('#open-panel').click(() => $('#interaction-panel').fadeIn());
             $('#close-panel').click(() => $('#interaction-panel').fadeOut());
@@ -228,11 +267,6 @@
                 }
             }, 5000);
         });
-
-        function togglePlay() {
-            if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); }
-            else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); }
-        }
     </script>
 </body>
 </html>
