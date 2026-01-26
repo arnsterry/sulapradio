@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,20 +41,20 @@
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 100%); z-index: 1; }
         .station-logo { height: 75px; width: auto; }
         
-        /* Social Media Bar & Hover Effects */
+        /* Social Bar & Hover Zoom Effect */
         .social-bar { 
             position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 150; 
-            display: flex; flex-direction: column; gap: 12px;
+            display: flex; flex-direction: column; gap: 8px;
         }
         .social-icon { 
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
-            color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; 
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; font-size: 14px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bouncy zoom */
+            color: white; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; font-size: 13px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
         .social-icon:hover {
-            transform: scale(1.25);
+            transform: scale(1.3);
             background: var(--sonik-yellow);
             color: black;
             box-shadow: 0 0 15px var(--sonik-yellow);
@@ -129,13 +128,18 @@
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-white font-bold uppercase mb-2">Welcome to SULAP RADIO</h3>
-                        <p>Welcome to SULAP RADIO — the official home of the Sulap Compound, a digital stronghold for raw sound, real voices, and unapologetic music culture.</p>
+                        <p>Welcome to SULAP RADIO — the official home of the Sulap Compound, a digital stronghold for raw sound, real voices, and unapologetic music culture. We broadcast cool, timeless, and vibe-driven music from the past to the present — sounds that shaped generations and continue to move today, creating a space where music feels alive, personal, and real. This is not just a radio station — this is a movement.</p>
                     </div>
+                    <p>Born and broadcasting straight from the heart of Bislig City, SULAP RADIO exists for listeners who crave something different. For those who grew tired of predictable playlists and soulless rotations.</p>
                 </div>
                 <div class="space-y-6">
                     <div>
                         <h3 class="text-white font-bold uppercase mb-2">Rooted in Bislig City</h3>
-                        <p>Bislig City is more than a location — it’s a vibe and a community.</p>
+                        <p>Bislig City is more than a location — it’s a vibe and a community. A city filled with cool, resilient, and creative people who carry music in their everyday lives. From roadside speakers and neighborhood jams to beachside hangouts and midnight listening sessions, music flows naturally through the city.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold uppercase mb-2">Our Mission</h3>
+                        <p>Our mission is simple yet powerful: To create an independent, high-energy platform that celebrates music across generations, supports local and underground talent, and connects listeners through sound.</p>
                     </div>
                 </div>
             </div>
@@ -158,13 +162,19 @@
         const STATION_ID = "507";
         const _k = "f45b139134ce81b1:cd9d1bdd34bd6d0811962c7ccacad167";
         const audio = document.getElementById('mainAudio');
+        let fullLibrary = [];
+
+        function startStation() {
+            audio.play().catch(() => {});
+            $('#playIcon').attr('class', 'fas fa-pause-circle');
+            $('#splash-screen').fadeOut();
+        }
 
         function updateLiveInfo() {
-            // Updated with cache-buster ?t= for auto-updating songs
+            // Cache buster added (?t=) to ensure song updates automatically
             $.getJSON(`${API_BASE}/nowplaying/${STATION_ID}?t=${Date.now()}`, function(data) {
                 if (data && data.now_playing) {
-                    const songText = data.now_playing.song.text;
-                    $('#current-track, #footer-track').text(songText);
+                    $('#current-track, #footer-track').text(data.now_playing.song.text);
                     $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
                     $('#now-playing-art').css('background-image', `url(${data.now_playing.song.art})`);
                     
@@ -177,25 +187,32 @@
             });
         }
 
-        function startStation() {
-            audio.play().catch(() => {});
-            $('#playIcon').attr('class', 'fas fa-pause-circle');
-            $('#splash-screen').fadeOut();
+        function loadSongLibrary() {
+            $.getJSON(`${API_BASE}/station/${STATION_ID}/requests?t=${Date.now()}`, function(data) {
+                fullLibrary = data; renderSongs(fullLibrary);
+            });
         }
 
-        function togglePlay() {
-            if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); }
-            else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); }
+        function renderSongs(songs) {
+            let html = "";
+            songs.forEach(item => {
+                html += `<div class="bg-white/5 p-2 flex items-center justify-between mb-1 border-b border-white/5"><div class="flex items-center space-x-3"><img src="${item.song.art}" class="w-8 h-8"><div><div class="text-[10px] font-black uppercase text-white">${item.song.title}</div><div class="text-[8px] text-gray-500 uppercase">${item.song.artist}</div></div></div><button onclick="sendRequest('${item.request_id}')" class="bg-yellow-400 text-black px-3 py-1 text-[8px] font-black uppercase">REQ</button></div>`;
+            });
+            $('#song-library').html(html);
+        }
+
+        function sendRequest(requestId) {
+            $.ajax({ url: `${API_BASE}/station/${STATION_ID}/request/${requestId}`, type: 'POST', headers: { 'X-API-Key': _k }, success: function() { alert("Request Sent!"); } });
         }
 
         $(document).ready(function(){
-            updateLiveInfo();
+            updateLiveInfo(); 
+            loadSongLibrary();
             setInterval(updateLiveInfo, 10000);
 
             $('#open-panel').click(() => $('#interaction-panel').fadeIn());
             $('#close-panel').click(() => $('#interaction-panel').fadeOut());
 
-            // Slider Logic
             let slidesHtml = "";
             for(let i=1; i<=20; i++) {
                 let show = (i===1) ? 'style="display:block;"' : '';
@@ -211,6 +228,11 @@
                 }
             }, 5000);
         });
+
+        function togglePlay() {
+            if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); }
+            else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); }
+        }
     </script>
 </body>
 </html>
