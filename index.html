@@ -22,56 +22,30 @@
             color: #fff; text-shadow: 2px 2px 0px var(--sonik-yellow);
         }
         .track-info-font {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 900;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            font-style: italic;
+            font-family: 'Roboto', sans-serif; font-weight: 900; letter-spacing: -0.01em;
+            text-transform: uppercase; font-style: italic;
         }
 
-        /* ON AIR Pulse Animation */
-        @keyframes slowFlicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+        @keyframes slowFlicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .flicker-on-air { animation: slowFlicker 3s ease-in-out infinite; }
 
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.4) 100%); z-index: 1; }
         .station-logo { height: 75px; width: auto; }
         
-        /* Social Bar & Hover Zoom */
-        .social-bar { 
-            position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 150; 
-            display: flex; flex-direction: column; gap: 8px;
-        }
+        .social-bar { position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 150; display: flex; flex-direction: column; gap: 8px; }
         .social-icon { 
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
             color: white; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; font-size: 13px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
         }
-        .social-icon:hover {
-            transform: scale(1.3);
-            background: var(--sonik-yellow); color: black;
-            box-shadow: 0 0 15px var(--sonik-yellow); border-color: var(--sonik-yellow);
-        }
+        .social-icon:hover { transform: scale(1.3); background: var(--sonik-yellow); color: black; box-shadow: 0 0 15px var(--sonik-yellow); border-color: var(--sonik-yellow); }
 
-        /* Volume Slider Custom Styling */
         input[type="range"] { -webkit-appearance: none; background: #333; height: 4px; border-radius: 5px; outline: none; }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 12px; height: 12px; background: var(--sonik-yellow);
-            border-radius: 50%; cursor: pointer; box-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; background: var(--sonik-yellow); border-radius: 50%; cursor: pointer; }
 
-        #interaction-panel { 
-            display: none; background: #0a0a0a; border-bottom: 4px solid var(--sonik-yellow); 
-            height: 100vh; overflow-y: auto; position: fixed; top: 0; width: 100%; z-index: 200; 
-        }
-        #splash-screen {
-            position: fixed; inset: 0; z-index: 9999; background: #000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
+        #interaction-panel { display: none; background: #0a0a0a; border-bottom: 4px solid var(--sonik-yellow); height: 100vh; overflow-y: auto; position: fixed; top: 0; width: 100%; z-index: 200; }
+        #splash-screen { position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .tune-in-btn { font-family: 'Metal Mania', cursive; background: var(--sonik-yellow); color: black; padding: 12px 30px; font-size: 1.2rem; cursor: pointer; }
     </style>
 </head>
@@ -89,9 +63,19 @@
                 <button id="close-panel" class="text-yellow-400 border border-yellow-400 px-4 py-1 uppercase font-bold text-xs">Close [X]</button>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div><h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">History</h3><div id="recent-list" class="space-y-2"></div></div>
-                <div class="flex flex-col h-[550px]"><h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">Playlist</h3><input type="text" id="list-filter" placeholder="SEARCH..." class="bg-[#111] border border-white/10 p-3 mb-4 text-[10px] text-yellow-400 outline-none"><div id="song-library" class="overflow-y-auto space-y-2 flex-grow"></div></div>
-                <div><h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">Chat</h3><iframe src="https://www3.cbox.ws/box/?boxid=3551593&boxtag=Agz31u" width="100%" height="450" frameborder="0"></iframe></div>
+                <div>
+                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">History</h3>
+                    <div id="recent-list" class="space-y-2"></div>
+                </div>
+                <div class="flex flex-col h-[550px]">
+                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">Playlist</h3>
+                    <input type="text" id="list-filter" placeholder="SEARCH..." class="bg-[#111] border border-white/10 p-3 mb-4 text-[10px] text-yellow-400 outline-none uppercase font-bold">
+                    <div id="song-library" class="overflow-y-auto space-y-2 flex-grow pr-2"></div>
+                </div>
+                <div>
+                    <h3 class="text-yellow-400 text-sm mb-4 tracking-widest font-bold uppercase">Chat</h3>
+                    <iframe src="https://www3.cbox.ws/box/?boxid=3551593&boxtag=Agz31u" width="100%" height="450" frameborder="0"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -154,12 +138,9 @@
                 <div id="now-playing-art" class="w-10 h-10 bg-gray-900 border border-white/10 bg-cover bg-center flex-shrink-0"></div>
                 <div class="truncate text-[10px] uppercase font-black text-white" id="footer-track">Sulap Radio</div>
             </div>
-            
             <div class="flex items-center space-x-4">
                 <div class="hidden md:flex items-center space-x-2">
-                    <button onclick="toggleMute()" class="text-gray-400 hover:text-yellow-400 transition-colors">
-                        <i id="volumeIcon" class="fas fa-volume-up"></i>
-                    </button>
+                    <button onclick="toggleMute()" class="text-gray-400 hover:text-yellow-400"><i id="volumeIcon" class="fas fa-volume-up"></i></button>
                     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" class="w-20">
                 </div>
                 <button onclick="togglePlay()" class="text-4xl text-yellow-400"><i id="playIcon" class="fas fa-play-circle"></i></button>
@@ -173,99 +154,77 @@
         const _k = "f45b139134ce81b1:cd9d1bdd34bd6d0811962c7ccacad167";
         const audio = document.getElementById('mainAudio');
         const volumeSlider = document.getElementById('volumeSlider');
+        let currentSongTitle = "";
+        let fullLibrary = [];
         let lastVolume = 1;
 
-        function startStation() {
-            audio.play().catch(() => {});
-            $('#playIcon').attr('class', 'fas fa-pause-circle');
-            $('#splash-screen').fadeOut();
-        }
-
-        volumeSlider.addEventListener('input', (e) => {
-            const val = e.target.value;
-            audio.volume = val;
-            updateVolumeIcon(val);
-            if (val > 0) lastVolume = val;
-        });
-
-        function updateVolumeIcon(val) {
-            const icon = $('#volumeIcon');
-            if (val == 0) icon.attr('class', 'fas fa-volume-mute text-red-500');
-            else if (val < 0.5) icon.attr('class', 'fas fa-volume-down');
-            else icon.attr('class', 'fas fa-volume-up');
-        }
-
-        function toggleMute() {
-            if (audio.volume > 0) { lastVolume = audio.volume; audio.volume = 0; volumeSlider.value = 0; }
-            else { audio.volume = lastVolume; volumeSlider.value = lastVolume; }
-            updateVolumeIcon(audio.volume);
-        }
+        function startStation() { audio.play().catch(() => {}); $('#playIcon').attr('class', 'fas fa-pause-circle'); $('#splash-screen').fadeOut(); }
 
         function updateLiveInfo() {
-            // Force jQuery to avoid any internal caching
+            const cacheBuster = new Date().getTime();
             $.ajax({
-                url: `${API_BASE}/nowplaying/${STATION_ID}`,
-                data: { t: Date.now() }, // Cache buster
+                url: `${API_BASE}/nowplaying/${STATION_ID}?unique=${cacheBuster}`,
+                method: "GET",
                 cache: false,
-                dataType: "json",
                 success: function(data) {
                     if (data && data.now_playing) {
-                        const song = data.now_playing.song;
-                        
-                        // Update DOM only if it exists
-                        $('#current-track').fadeOut(200, function() {
-                            $(this).text(song.text).fadeIn(200);
-                        });
-                        
-                        $('#footer-track').text(song.text);
-                        $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
-                        
-                        // Update Album Art
-                        const artUrl = song.art || "img/logo.png";
-                        $('#now-playing-art').css('background-image', `url(${artUrl})`);
-                        
-                        // Update History
-                        let histHtml = "";
-                        if (data.song_history) {
+                        const newSong = data.now_playing.song.text;
+                        if (newSong !== currentSongTitle) {
+                            currentSongTitle = newSong;
+                            $('#current-track').fadeOut(200, function() { $(this).text(newSong).fadeIn(200); });
+                            $('#footer-track').text(newSong);
+                            $('#current-playlist-tag').text(data.now_playing.playlist || "SULAP LIVE");
+                            $('#now-playing-art').css('background-image', `url(${data.now_playing.song.art})`);
+                            
+                            let histHtml = "";
                             data.song_history.slice(0, 5).forEach(item => {
                                 histHtml += `<div class="bg-white/5 p-2 border-l-2 border-yellow-400 mb-2 text-[10px] uppercase font-bold flex items-center"><img src="${item.song.art}" class="w-7 h-7 mr-3"><div>${item.song.text}</div></div>`;
                             });
                             $('#recent-list').html(histHtml);
                         }
                     }
-                },
-                error: function() { console.log("Station API offline."); }
+                }
             });
         }
 
-        function togglePlay() {
-            if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); }
-            else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); }
+        function loadSongLibrary() {
+            $.getJSON(`${API_BASE}/station/${STATION_ID}/requests?t=${Date.now()}`, function(data) {
+                fullLibrary = data; renderSongs(fullLibrary);
+            });
         }
 
-        $(document).ready(function(){
-            // Run immediately
-            updateLiveInfo();
-            // Interval set to 8 seconds for faster refresh
-            setInterval(updateLiveInfo, 8000);
+        function renderSongs(songs) {
+            let html = "";
+            songs.forEach(item => {
+                html += `<div class="bg-white/5 p-2 flex items-center justify-between mb-1 border-b border-white/5"><div class="flex items-center space-x-3"><img src="${item.song.art}" class="w-8 h-8"><div><div class="text-[10px] font-black uppercase text-white">${item.song.title}</div><div class="text-[8px] text-gray-500 uppercase">${item.song.artist}</div></div></div><button onclick="sendRequest('${item.request_id}')" class="bg-yellow-400 text-black px-3 py-1 text-[8px] font-black uppercase">REQ</button></div>`;
+            });
+            $('#song-library').html(html);
+        }
 
+        function sendRequest(requestId) {
+            $.ajax({ url: `${API_BASE}/station/${STATION_ID}/request/${requestId}`, type: 'POST', headers: { 'X-API-Key': _k }, success: function() { alert("Request Sent!"); } });
+        }
+
+        $('#list-filter').on('keyup', function() {
+            let val = $(this).val().toLowerCase();
+            let filtered = fullLibrary.filter(item => item.song.title.toLowerCase().includes(val) || item.song.artist.toLowerCase().includes(val));
+            renderSongs(filtered);
+        });
+
+        volumeSlider.addEventListener('input', (e) => { audio.volume = e.target.value; updateVolumeIcon(e.target.value); if(e.target.value > 0) lastVolume = e.target.value; });
+        function updateVolumeIcon(val) { const icon = $('#volumeIcon'); if(val == 0) icon.attr('class', 'fas fa-volume-mute text-red-500'); else if(val < 0.5) icon.attr('class', 'fas fa-volume-down'); else icon.attr('class', 'fas fa-volume-up'); }
+        function toggleMute() { if(audio.volume > 0) { lastVolume = audio.volume; audio.volume = 0; volumeSlider.value = 0; } else { audio.volume = lastVolume; volumeSlider.value = lastVolume; } updateVolumeIcon(audio.volume); }
+        function togglePlay() { if (audio.paused) { audio.play(); $('#playIcon').attr('class', 'fas fa-pause-circle'); } else { audio.pause(); $('#playIcon').attr('class', 'fas fa-play-circle'); } }
+
+        $(document).ready(function(){
+            updateLiveInfo(); loadSongLibrary(); setInterval(updateLiveInfo, 5000);
             $('#open-panel').click(() => $('#interaction-panel').fadeIn());
             $('#close-panel').click(() => $('#interaction-panel').fadeOut());
-
             let slidesHtml = "";
-            for(let i=1; i<=20; i++) {
-                let show = (i===1) ? 'style="display:block;"' : '';
-                slidesHtml += `<div class="slide" ${show} style="background-image: url('img/slide${i}.jpg');"></div>`;
-            }
+            for(let i=1; i<=20; i++) { let show = (i===1) ? 'style="display:block;"' : ''; slidesHtml += `<div class="slide" ${show} style="background-image: url('img/slide${i}.jpg');"></div>`; }
             $('#hero-slider').html(slidesHtml);
             let slides = $('.slide'), current = 0;
-            setInterval(() => {
-                if(slides.length > 0) {
-                    $(slides[current]).fadeOut(1500);
-                    current = (current + 1) % slides.length;
-                    $(slides[current]).fadeIn(1500);
-                }
-            }, 5000);
+            setInterval(() => { $(slides[current]).fadeOut(1500); current = (current + 1) % slides.length; $(slides[current]).fadeIn(1500); }, 5000);
         });
     </script>
 </body>
