@@ -1,0 +1,20 @@
+[0304/073240.376:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/073245.389:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/073250.401:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/073255.415:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/073300.423:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/152033.337:INFO:CONSOLE(1)] "(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/152033.338:INFO:CONSOLE(1)] "console.trace", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/152033.338:INFO:CONSOLE(1)] "(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/152033.338:INFO:CONSOLE(1)] "console.trace", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/152033.339:INFO:CONSOLE(1)] "(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/152033.339:INFO:CONSOLE(1)] "console.trace", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-learn/build/external.js (1)
+[0304/170810.229:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/170815.528:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171610.614:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171615.618:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171922.239:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171927.244:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171932.253:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/171939.827:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[0304/172135.360:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
