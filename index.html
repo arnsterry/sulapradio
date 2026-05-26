@@ -1,192 +1,422 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <base href="https://sulapradio.com/">
-    <title>SULAP RADIO | Broadcasting Live from Bislig City</title>    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css"> -->
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/style.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>SULAP RADIO | BROADCASTING LIVE FROM BISLIG CITY</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+  
+  <style>
+    :root{ --y:#f8ff00; --neon:#00d4ff; --p1:#ff3d81; --p2:#ff9d00; }
+    html,body{background:#000;color:#fff;font-family:Roboto,sans-serif;margin:0;overflow-x:hidden}
 
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="images/favicon.png" type="image/x-icon">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="//code.jquery.com/jquery-3.0.0.js"></script>
-    <script src="https://use.fontawesome.com/c74742b36d.js"></script>
+    /* HERO SLIDER WITH SMOOTH CROSS-FADE */
+    #hero-slider{position:absolute;inset:0;z-index:0;height:100%; background:#000; cursor: zoom-in;}
+    .slide{position:absolute;inset:0;background-size:cover;background-position: center 20%; opacity:0; height:100%; transition: opacity 1.4s ease-in-out; z-index: 0;}
+    .slide.active{opacity:1; z-index: 1;}
     
-  </head>
-  <body>
-  <div class="site-wrap">
-    <div class="site-blocks-cover overlay" style="background-image: url('images/background.jpg');" data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-md-12 text-center" data-aos="fade-up" data-aos-delay="400">
-            <a href="./" class="logo"><img src="images/logo.png" alt="Sulap Radio - www.sulapradio.com"></a>
+    .hero-overlay{position:absolute;inset:0;z-index:2;background:radial-gradient(65% 55% at 50% 38%,rgba(0,0,0,.04) 0%,rgba(0,0,0,.18) 60%,rgba(0,0,0,.52) 100%); pointer-events: none;}
+    
+    /* LOGO & CLOCK */
+    nav{ padding:10px 12px!important; pointer-events: none; }
+    .station-logo, #clock { pointer-events: auto; }
+    .station-logo{height:72px;width:auto;filter:drop-shadow(0 0 10px rgba(248,255,0,.18))}
+    #clock{
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color:rgba(255,255,255,0.7);
+      font-weight: 700;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(4px);
+      padding: 5px 10px;
+      border-radius: 999px;
 
-            <div id="nowPlaying">
-  <div id="clock"
-       style="font-size:12px;
-              letter-spacing:4px;
-              margin-bottom:18px;
-              font-weight:bold;
-              color:#ffffffcc;">
+      /* FIX: keep clock inside HERO top-right, not affecting player */
+      position:absolute;
+      top:10px;
+      right:12px;
+      z-index:60;
+    }
+
+    .glass2{background:rgba(0,0,0,.34);border:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:18px}
+    .pill{border:0;background:rgba(255,255,255,.06);padding:4px 8px;border-radius:999px}
+    .tiny{font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+    #splash{position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 18px}
+    .btn{border-radius:999px;font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:10px;padding:10px 14px;transition:transform .18s ease,background .18s ease,color .18s ease}
+    .btn:active{transform:scale(.98)}
+    .btnY{background:var(--y);color:#000}
+    
+    @media (max-width:640px){
+      .station-logo{height:52px}
+      #splash img{height:68px}
+      #splash button{width:100%;max-width:360px;padding:14px 18px;font-size:11px}
+      .btn{padding:10px 12px; font-size: 9px;}
+      #clock{font-size: 9px; padding: 4px 6px; top:8px; right:10px;}
+    }
+
+    .player-strip{background: linear-gradient(180deg, rgba(10,0,20,.92) 0%, rgba(0,0,0,.92) 100%); border-top: 2px solid rgba(0,212,255,.45); border-bottom: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); position: relative; z-index: 10;}
+    .player-inner{max-width: 1200px; margin: 0 auto; padding: 14px 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;}
+
+    /* =========================
+       ONLY EDIT: ALBUM ART
+       - bigger, square, steady glow
+       - no spin
+       - move slightly down
+       ========================= */
+    .art-container{
+      position:relative;
+      width:82px;     /* was 62px */
+      height:82px;    /* was 62px */
+      margin-top:10px;
+    }
+
+    .p-pulse{
+      position:absolute;
+      inset:-10px;          /* bigger aura */
+      border-radius:22px;   /* match square rounding */
+      background: rgba(0,212,255,.35);
+      opacity:.40;
+      filter: blur(12px);
+      z-index:0;
+      animation:none !important; /* steady */
+    }
+    .playing .p-pulse{
+      animation:none !important; /* steady */
+      opacity:.40;
+    }
+
+    .p-art{
+      width: 82px;   /* was 62px */
+      height: 82px;  /* was 62px */
+
+      border-radius:18px; /* square-ish */
+      border: 4px solid var(--neon);
+      background:#0b0014;
+      background-size:cover;
+      background-position:center;
+
+      box-shadow:
+        0 0 16px rgba(0,212,255,.45),
+        0 0 34px rgba(0,212,255,.22),
+        0 14px 34px rgba(0,0,0,.55);
+
+      cursor:pointer;
+      position:relative;
+      z-index:2;
+    }
+
+    /* hard-stop spin even if class gets added */
+    .p-art.spinning{ animation: none !important; transform:none !important; }
+
+    /* keep your keyframes intact (not used) */
+    @keyframes rotate-record{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    @keyframes pulse-ring { 0% { transform: scale(.8); opacity: 0.5; } 80%, 100% { transform: scale(1.5); opacity: 0; } }
+
+    .p-meta{min-width:0}
+    .p-header{display:flex; align-items:center; gap:8px; margin-bottom:4px;}
+    .p-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:900; color:rgba(248,216,74,.95);font-style:italic; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    
+    .p-title{font-size:15px;font-weight:900;text-transform:uppercase;color:var(--neon); text-shadow:2px 2px 4px rgba(0,0,0,.8); white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1; cursor: copy;}
+    .p-artist{font-size:12px;font-weight:800;color:rgba(0,212,255,.90); white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;}
+    .p-progress{margin-top:8px;height:6px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+    .p-progress > div{height:100%;width:0%;background:linear-gradient(to right,var(--p1),var(--p2));transition:width .35s linear}
+    .p-time{margin-top:6px;display:flex;justify-content:space-between; font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase; color:rgba(255,255,255,.55);}
+    
+    .p-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .p-btn{
+      border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:999px;
+      padding:10px 12px;font-weight:900;letter-spacing:.14em;font-size:10px;text-transform:uppercase;
+      transition:transform .18s ease, box-shadow .18s ease;
+      white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:8px;cursor:pointer;
+    }
+    .p-btn:hover{transform:translateY(-1px);box-shadow:0 0 18px rgba(0,212,255,.14)}
+
+    /* ONLY EDIT: make icon buttons look consistent */
+    .p-btn.p-ico{
+      width:44px;
+      height:44px;
+      padding:0;
+      border-radius:999px;
+      font-size:16px;
+      letter-spacing:0;
+    }
+
+    /* FIX: Mobile player layout so it doesn't "break" */
+    @media (max-width:640px){
+      .player-inner{
+        /* widened column so bigger album art doesn't collide */
+        grid-template-columns: 94px 1fr;
+        grid-template-areas:
+          "art meta"
+          "actions actions";
+        align-items:start;
+      }
+      .art-container{grid-area:art}
+      .p-meta{grid-area:meta}
+
+      /* ONLY EDIT: actions fit perfectly on mobile, no overflow */
+      .p-actions{
+        grid-area:actions;
+        width:100%;
+        margin-top:10px;
+        display:grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap:8px;
+        justify-content:stretch;
+      }
+      .p-actions .p-btn{width:100%;}
+
+      /* keep the big buttons full-width for clean layout */
+      #reconnect{grid-column: 1 / -1;}
+      #requestBtn{grid-column: 1 / -1;}
+
+      /* icon buttons stay side-by-side */
+      .p-btn.p-ico{
+        width:100%;
+        height:44px;
+      }
+
+      .p-btn{padding:10px 12px;font-size:9px;}
+    }
+
+    #volDock, #chatDock{ position: fixed; right: 12px; z-index: 9999; display:flex; flex-direction: column; align-items:center; gap:8px; padding: 10px; border-radius: 18px; background: rgba(15, 0, 30, 0.52); border: 1px solid rgba(0, 212, 255, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 14px 50px rgba(0,0,0,.55); transition: opacity .35s ease, transform .35s ease; opacity: .30; }
+    #volDock:hover, #chatDock:hover{opacity:1}
+    #volDock{ top: 50%; transform: translateY(-50%); }
+    #chatDock{ top: calc(50% + 110px); } 
+    
+    #volBtn, .chat-float-btn{ width: 38px; height: 38px; border-radius: 999px; border:0; cursor:pointer; background: rgba(255,255,255,.08); color:#fff; display:inline-flex;align-items:center;justify-content:center; font-size: 16px; transition: background 0.2s; }
+    .chat-float-btn:hover{ background: var(--y); color: #000; }
+    #volPanel{display:none; width: 44px; padding: 10px 8px 8px; border-radius: 16px; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.08);}
+    #volDock.open #volPanel{display:flex;flex-direction:column;align-items:center;gap:8px}
+    #volRange{ -webkit-appearance: slider-vertical; appearance: slider-vertical; width: 12px; height: 128px; background: transparent; cursor: pointer; }
+    #volPct{ text-align:center; font-size:9px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; color: rgba(255,255,255,.70); }
+
+    .story-wrap{ background: radial-gradient(90% 70% at 40% 10%, rgba(0,212,255,.08) 0%, rgba(0,0,0,0) 60%), radial-gradient(85% 65% at 70% 40%, rgba(248,255,0,.06) 0%, rgba(0,0,0,0) 60%), #060606; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); }
+    .quote{border-left:3px solid rgba(0,212,255,.75);padding-left:12px;color:rgba(255,255,255,.78)}
+    .kicker{letter-spacing:.38em;font-weight:900;text-transform:uppercase;font-size:10px;color:rgba(0,0,212,255,.9)}
+    .kicker{letter-spacing:.38em;font-weight:900;text-transform:uppercase;font-size:10px;color:rgba(0,212,255,.9)}
+
+    .lightbox{position:fixed; inset:0; z-index:99999; background: rgba(0,0,0,.86); display:none; align-items:center; justify-content:center; padding:18px;}
+    .lightbox.open{display:flex}
+    .lightbox-card{width:min(92vw,720px);border-radius:22px;overflow:hidden;border:2px solid rgba(0,212,255,.35);box-shadow:0 20px 80px rgba(0,0,0,.7);background:rgba(10,0,20,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .lightbox-top{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .lightbox-title{font-weight:900;letter-spacing:.12em;font-size:10px;text-transform:uppercase;color:rgba(255,255,255,.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:78%}
+    .lightbox-close{border:0;background:rgba(255,255,255,.10);color:#fff;border-radius:999px;padding:8px 10px;font-weight:900;letter-spacing:.12em;font-size:10px;text-transform:uppercase;cursor:pointer}
+    .lightbox-img{width:100%;height:auto;display:block;background:#000;}
+    #copyToast{ position:fixed; bottom:120px; left:50%; transform:translateX(-50%); background:var(--y); color:#000; padding:8px 16px; border-radius:999px; font-weight:900; font-size:10px; text-transform:uppercase; letter-spacing:.1em; z-index:10000; display:none; }
+  </style>
+</head>
+
+<body>
+  <audio id="a" preload="none" src="https://sulapradio.info/listen/sulap_radio/radio.mp3" style="display:none"></audio>
+  <div id="copyToast">Copied to Clipboard!</div>
+
+  <div id="volDock"><button id="volBtn" type="button"><i id="volIcon" class="fas fa-volume-up"></i></button><div id="volPanel"><input id="volRange" type="range" min="0" max="1" step="0.01" value="1"><div id="volPct">100%</div></div></div>
+  <div id="chatDock"><a href="https://m.me/sulap.compound" target="_blank" rel="noopener" class="chat-float-btn" title="Chat with Sulap"><i class="fa-brands fa-facebook-messenger"></i></a></div>
+
+  <div id="splash">
+    <img src="img/logo.png" class="h-20 mb-6" alt="SULAP RADIO">
+    <div id="greeting" class="tiny text-white/55 mb-2">SULAP RADIO</div>
+    <div class="glass2 px-5 py-3 mb-7">
+      <div class="flex items-center gap-3 flex-wrap justify-center">
+        <span class="pill tiny text-white/60">BISLIG CITY</span>
+        <span class="tiny text-white/60">Broadcasting Live</span>
+      </div>
+    </div>
+    <button class="btn btnY px-8 py-3" onclick="startStation()">TUNE IN</button>
   </div>
 
-  <div id="pTitle"
-       style="font-size:42px;
-              font-weight:900;
-              text-transform:uppercase;
-              color:white;
-              line-height:1.1;">
-    LOADING...
-  </div>
+  <section id="hero-area" class="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden px-0">
+    <div id="hero-slider"></div>
+    <div class="hero-overlay"></div>
+    <nav class="absolute top-0 left-0 w-full z-50 flex justify-between items-start">
+      <img src="img/logo.png" alt="SULAP RADIO" class="station-logo">
+      <div class="mt-0 mr-0">
+        <div id="clock"></div>
+      </div>
+    </nav>
+  </section>
 
-  <div id="pArtist"
-       style="font-size:20px;
-              margin-top:10px;
-              color:#00d4ff;
-              font-weight:bold;">
-    —
-  </div>
+  <section class="player-strip">
+    <div class="player-inner">
+      <div class="art-container" id="artCont">
+          <div class="p-pulse"></div>
+          <button type="button" id="pArt" class="p-art"></button>
+      </div>
+      <div class="p-meta">
+        <div class="p-header">
+            <div class="p-tag" id="pTag">LOADING...</div>
+        </div>
+        <div class="p-title" id="pTitle">Connecting...</div>
+        <div class="p-artist" id="pArtist">—</div>
+        <div class="p-progress"><div id="pBar"></div></div>
+        <div class="p-time"><span id="pPos">00:00</span><span id="pDur">00:00</span></div>
+      </div>
+      <div class="p-actions">
+        <button class="p-btn" id="reconnect"><i class="fa-solid fa-rotate"></i>RECONNECT</button>
+        <a class="p-btn" id="requestBtn" href="#" target="_blank"><i class="fa-solid fa-music"></i>REQUEST</a>
+        <a class="p-btn p-ico" href="https://fb.com/sulap.compound" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a class="p-btn p-ico" href="https://instagram.com/sulap.compound" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </section>
 
-  <div style="margin-top:14px;
-              color:#f8ff00;
-              font-weight:bold;
-              letter-spacing:3px;">
-      <span id="pPos">00:00</span>
-      /
-      <span id="pDur">00:00</span>
-  </div>
+  <section class="story-wrap pt-16 pb-16 px-6 md:px-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="kicker mb-3">SULAP RADIO • BISLIG CITY •</div>
+      <h2 class="text-white text-l md:text-2xl font-black italic uppercase leading-tight">Welcome to the sound of Bislig — where the sea breeze meets the beat.</h2>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-200 leading-relaxed" style="font-size:13.5px;">
+        <div class="space-y-6">
+          <p>SULAP RADIO is more than a stream — it’s a living postcard from Bislig City. When you press play, you’re not just hearing songs; you’re stepping into a place that breathes with coastline air, roadside laughter, late-night tambayan stories, and the kind of calm that only a true hometown can give. This station is built for real people: listeners who want energy when they’re working, comfort when they’re tired, and something honest when the world feels too noisy.</p>
+          <p class="quote">We play to keep you company — in the morning grind, the long commute, the quiet midnight, or the weekend chill.</p>
+          <p>Our sound is curated with feeling. Classics that still hit the heart, modern tracks that move the day forward, and timeless vibes that make you stay a little longer. If you’re the type who keeps a tab open because the music makes the room feel alive — you’re exactly who we’re broadcasting for.</p>
+          <p>And yes — we love requests. If you’ve got a song that belongs to your story, send it. We’re here, live and listening, tuning the soundtrack of your day with the local soul of Surigao del Sur.</p>
+          <p>This is your digital sanctuary. Whether you are miles away from home or just around the corner in Mangagoy, SULAP RADIO bridges the distance with every note. We are more than just a frequency; we are the heartbeat of the community.</p>
+        </div>
+        <div class="space-y-6">
+          <p>Bislig City is a place you should experience, not just read about. It’s where nature feels huge and welcoming — waterfalls like the mighty Tinuy-an, serene rivers, wide skies, and coastlines that remind you to breathe deeper. The city moves with a steady rhythm: hardworking days, golden afternoons, and nights that feel warm even when the world is far away.</p>
+          <p>If you ever visit, come with an open heart and a hungry appetite. Explore the scenery, meet the people, and let the local vibe guide your steps. Bislig isn’t trying to be loud — it’s the kind of place that wins you over slowly, then stays with you for a long time. It’s an adventure waiting to happen, and a peace waiting to be found.</p>
+          <p class="quote">Consider this your invitation: visit Bislig City, take the photos, taste the food, feel the peace — then come back here and let SULAP RADIO bring those memories back with one song.</p>
+          <div class="glass2 p-4">
+            <div class="tiny text-white/60 mb-3">Why listeners stay</div>
+            <ul class="list-disc pl-5 space-y-2 text-white/80" style="font-size:13px;">
+              <li>It’s not random — the vibe is curated like a real station, shifting with the mood of the day.</li>
+              <li>It feels personal: live energy, local roots, global ears, and a community that listens together.</li>
+              <li>Album art is clickable (tap it) — because we believe the visual story matters as much as the sound.</li>
+              <li>Requests are open — your song isn't just a track; it's the next chapter of our broadcast.</li>
+              <li>Always High Fidelity — crystal clear streaming designed for speakers and headphones alike.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 flex flex-wrap items-center gap-3">
+        <a href="https://m.me/sulap.compound" target="_blank" class="btn btnY"><i class="fa-brands fa-facebook-messenger mr-2"></i> Chat With Sulap</a>
+        <a href="https://sulapradio.info/public/sulap_radio#/requests" target="_blank" class="btn btnY"><i class="fa-solid fa-music mr-2"></i> Request a Song</a>
+        <span class="tiny text-white/50">Keep this page open — let the music live with you, wherever you are.</span>
+      </div>
+    </div>
+  </section>
 
-  <div style="margin-top:28px;">
-    <a href="https://m.me/sulap.compound"
-       target="_blank"
-       style="display:inline-block;
-              padding:12px 22px;
-              background:#f8ff00;
-              color:#000;
-              font-weight:900;
-              text-decoration:none;
-              margin-right:10px;
-              border-radius:999px;">
-      CHAT WITH SULAP
-    </a>
-
-    <a href="https://sulapradio.info/public/sulap_radio#/requests"
-       target="_blank"
-       style="display:inline-block;
-              padding:12px 22px;
-              background:#f8ff00;
-              color:#000;
-              font-weight:900;
-              text-decoration:none;
-              border-radius:999px;">
-      REQUEST A SONG
-    </a>
-  </div>
-</div>
-
-            <!-- <div id="playerContainer"></div> -->
-            <div class="player-wrap">
-              <div class="container player">
-                <i class="control play-control fa fa-pause" style="display: none;"></i>
-                <i class="control play-control fa fa-play"></i>
-              </div>
-              <audio src="https://sulapradio.info/listen/sulap_radio/radio.mp3"" controls id="radioPlayer"></audio>
-            </div>
-
-            <div class="volume-canvas">
-              <ul>
-                <li><i class="fa fa-volume-down" aria-hidden="true"></i></li>
-                <li><div class="volume-wrap"><div id="volume"></div></div></li>
-                <li><i class="fa fa-volume-up" aria-hidden="true"></i></li>
-              </ul>
-            </div>
-
-            <div class="bg-primary">
-  <div class="container">
-    <div class="row">
-
-      <a href="https://fb.com/sulap.compound"
-         target="_blank"
-         class="col-6 text-center py-4 social-icon d-block facebook">
-         <span class="icon-facebook text-white"></span>
-      </a>
-
-      <a href="https://instagram.com/sulap.compound"
-         target="_blank"
-         class="col-6 text-center py-4 social-icon d-block instagram">
-         <span class="icon-instagram text-white"></span>
-      </a>
-
+  <div id="artLightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-card">
+      <div class="lightbox-top"><div id="lbTitle" class="lightbox-title">VIEWING IMAGE</div><button id="lbClose" class="lightbox-close" type="button">CLOSE</button></div>
+      <img id="lbImg" class="lightbox-img" alt="Lightbox view">
     </div>
   </div>
-</div>
-  <!-- script src="js/jquery-3.3.1.min.js"></script !-->
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/main.js"></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"759de7f0201449a0b0a70be691fb4fa7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
-<script>
-const API =
-"https://sulapradio.info/api/nowplaying/2";
+  <script>
+    (function(){
+      const O = { b: "https://sulapradio.info/api", i: 2, l: "https://sulapradio.info/listen/sulap_radio/radio.mp3", d: "img/default_art.jpg", pub: "https://sulapradio.info/public/sulap_radio" };
+      const A = document.getElementById("a"); let currentArtUrl = ""; let currentSongTitle = "";
+      
+      function fmt(sec){ sec = Math.max(0, Math.floor(sec||0)); const m = String(Math.floor(sec/60)).padStart(2,"0"); const s = String(sec%60).padStart(2,"0"); return m + ":" + s; }
+      
+      function updateClock(){ 
+          const t = new Date(); 
+          const h=t.getHours(); 
+          const mi=String(t.getMinutes()).padStart(2,"0"); 
+          const s=String(t.getSeconds()).padStart(2,"0"); 
+          const mo=String(t.getMonth()+1).padStart(2,"0"); 
+          const d=String(t.getDate()).padStart(2,"0"); 
+          $("#clock").text(t.getFullYear()+"-"+mo+"-"+d+" "+h+":"+mi+":"+s); 
+          let g = "SULAP RADIO"; 
+          if(h >= 5 && h < 12) g = "Good Morning from Bislig City"; 
+          else if(h >= 12 && h < 17) g = "Good Afternoon from the Waterfalls"; 
+          else if(h >= 17 && h < 21) g = "Golden Hour in Bislig City"; 
+          else g = "Midnight Vibes in Bislig"; 
+          $("#greeting").text(g.toUpperCase()); 
+      }
+      
+      /* ONLY EDIT: removed spinning addClass */
+      function reconnect(){ try{ A.pause(); A.src = O.l; A.load(); A.play().then(() => { $("#artCont").addClass("playing"); }).catch(()=>{}); }catch(e){} }
+      window.startStation = function(){ reconnect(); $("#splash").fadeOut(); };
+      
+      function setArt(url){ const u = (url && String(url).length) ? url : O.d; document.getElementById("pArt").style.backgroundImage = "url(" + u + ")"; }
+      
+      // LIGHTBOX TRIGGER
+      function showInLightbox(url, title){
+          $("#lbImg").attr("src", url);
+          $("#lbTitle").text(title.toUpperCase());
+          $("#artLightbox").addClass("open").attr("aria-hidden","false");
+      }
+      function closeLightbox(){ $("#artLightbox").removeClass("open").attr("aria-hidden","true"); $("#lbImg").attr("src", ""); }
+      
+      function updateNowPlaying(){ 
+          const url = O.b + "/nowplaying/" + O.i + "?t=" + Date.now(); 
+          $.ajax({ url, method:"GET", cache:false, success: function(data){ 
+              if(!(data && data.now_playing && data.now_playing.song)) return; 
+              const songText = data.now_playing.song.text || "Sulap Radio"; 
+              const title = data.now_playing.song.title || songText; 
+              const artist = data.now_playing.song.artist || ""; 
+              const playlist = data.now_playing.playlist_name || data.now_playing.playlist || "SULAP LIVE"; 
+              const art = data.now_playing.song.art || O.d; 
+              currentArtUrl = art || ""; currentSongTitle = title || songText; 
+              $("#pTitle").text(title); $("#pArtist").text(artist || "—"); $("#pTag").text(playlist); setArt(art); 
+              const elapsed = (typeof data.now_playing.elapsed === "number") ? data.now_playing.elapsed : 0; 
+              const duration = (typeof data.now_playing.duration === "number") ? data.now_playing.duration : 0; 
+              $("#pPos").text(fmt(elapsed)); $("#pDur").text(fmt(duration)); 
+              const pct = (duration > 0) ? Math.min(100, (elapsed/duration)*100) : 0; 
+              $("#pBar").css("width", pct + "%"); 
+          } }); 
+      }
 
-function fmt(sec){
-  sec = Math.floor(sec || 0);
-  const m = String(Math.floor(sec/60)).padStart(2,"0");
-  const s = String(sec%60).padStart(2,"0");
-  return m + ":" + s;
-}
+      $(document).ready(function(){
+        $("#requestBtn").attr("href", O.pub + "#/requests"); 
+        $("#reconnect").on("click", reconnect); 
+        
+        // CLICK EVENTS
+        $("#pArt").on("click", () => showInLightbox(currentArtUrl || O.d, currentSongTitle || "ALBUM ART")); 
+        $("#lbClose").on("click", closeLightbox);
+        
+        $("#pTitle").on("click", function(){ 
+            const txt = $(this).text() + " - " + $("#pArtist").text(); 
+            navigator.clipboard.writeText(txt).then(()=>{ $("#copyToast").fadeIn().delay(2000).fadeOut(); }); 
+        });
+        
+        /* ONLY EDIT: removed spinning toggles */
+        $(document).on("keydown", function(e){ 
+            if(e.key === "Escape") closeLightbox(); 
+            if(e.code === "Space") { e.preventDefault(); if(A.paused) { A.play(); $("#artCont").addClass("playing"); } else { A.pause(); $("#artCont").removeClass("playing"); } } 
+        });
 
-function updateClock(){
-  const t = new Date();
+        updateClock(); setInterval(updateClock, 1000); 
+        updateNowPlaying(); setInterval(updateNowPlaying, 5000);
+        
+        // FADE SLIDER INITIALIZATION
+        let slides = ""; 
+        for(let a=1; a<=20; a++){ 
+            slides += "<div class='slide' id='slide-"+a+"' data-src='img/slide" + a + ".jpg' style=\"background-image:url('img/slide" + a + ".jpg');\"></div>"; 
+        }
+        $("#hero-slider").html(slides);
+        let current = 1;
+        $(`#slide-${current}`).addClass('active');
+        
+        setInterval(function(){
+            const next = (current % 20) + 1;
+            $(`#slide-${current}`).removeClass('active');
+            $(`#slide-${next}`).addClass('active');
+            current = next;
+        }, 5200);
 
-  const h = String(t.getHours()).padStart(2,"0");
-  const m = String(t.getMinutes()).padStart(2,"0");
-  const s = String(t.getSeconds()).padStart(2,"0");
+        // HERO IMAGE CLICK HANDLER
+        $("#hero-slider").on("click", function(){
+            const activeSlideUrl = $(`#slide-${current}`).attr("data-src");
+            showInLightbox(activeSlideUrl, "Sulap Fans Club");
+        });
 
-  document.getElementById("clock").innerHTML =
-    h + ":" + m + ":" + s;
-}
-
-function updateNowPlaying(){
-
-  $.getJSON(API, function(data){
-
-    if(!data.now_playing) return;
-
-    const song = data.now_playing.song;
-
-    $("#pTitle").text(song.title || "SULAP RADIO");
-    $("#pArtist").text(song.artist || "—");
-
-    $("#pPos").text(
-      fmt(data.now_playing.elapsed)
-    );
-
-    $("#pDur").text(
-      fmt(data.now_playing.duration)
-    );
-  });
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-
-setInterval(updateNowPlaying, 5000);
-updateNowPlaying();
-</script>
-
+        const volDock = document.getElementById("volDock"), volBtn = document.getElementById("volBtn"); 
+        const volIcon = document.getElementById("volIcon"), volRange = document.getElementById("volRange"), volPct = document.getElementById("volPct"); 
+        function setVolUI(v){ v = Math.max(0, Math.min(1, Number(v || 0))); volRange.value = v; volPct.textContent = Math.round(v * 100) + "%"; if(v === 0) volIcon.className = "fas fa-volume-mute"; else if(v < 0.5) volIcon.className = "fas fa-volume-down"; else volIcon.className = "fas fa-volume-up"; }
+        volBtn.addEventListener("click", (e)=>{ e.stopPropagation(); volDock.classList.toggle("open"); }); 
+        document.addEventListener("click", (e)=>{ if(!volDock.contains(e.target)) volDock.classList.remove("open"); }, true);
+        volRange.addEventListener("input", (e)=>{ const v = parseFloat(e.target.value); A.volume = v; setVolUI(v); });
+      });
+    })();
+  </script>
 </body>
 </html>
